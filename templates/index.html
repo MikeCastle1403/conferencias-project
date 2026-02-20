@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ conference.name }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container glass-panel">
+        <header>
+            <div class="header-content">
+                <p class="date-location">{{ conference.date }} | {{ conference.location }}</p>
+                <h1>{{ conference.name }}</h1>
+                <p class="description">{{ conference.description }}</p>
+            </div>
+        </header>
+
+        <section class="search-section">
+            <input type="text" id="searchInput" placeholder="Buscar charlas, presentadores o categorías...">
+            <button id="themeToggle" class="theme-toggle" aria-label="Cambiar Modo Oscuro/Claro">
+                ☀️
+            </button>
+        </section>
+
+        <main>
+            <section class="schedule">
+                <h2>Horario</h2>
+                <div class="timeline">
+                    {% for event in events %}
+                    <div class="event-card {% if event.type == 'descanso' %}break-card{% endif %}"
+                        data-title="{{ event.title }}" data-category="{{ event.category }}"
+                        data-speakers="{{ event.speakers | map(attribute='first_name') | join(' ') }} {{ event.speakers | map(attribute='last_name') | join(' ') }}">
+
+                        <div class="time-column">
+                            <span class="start-time">{{ event.start_time }}</span>
+                            <span class="end-time">{{ event.end_time }}</span>
+                        </div>
+
+                        <div class="content-column">
+                            <div class="event-header">
+                                <span class="category-tag">{{ event.category }}</span>
+                                <h3>{{ event.title }}</h3>
+                            </div>
+
+                            <p class="event-desc">{{ event.description }}</p>
+
+                            {% if event.speakers %}
+                            <div class="speaker-list">
+                                {% for speaker in event.speakers %}
+                                <div class="speaker-pill">
+                                    <span class="speaker-name">{{ speaker.first_name }} {{ speaker.last_name }}</span>
+                                    <a href="{{ speaker.linkedin }}" target="_blank" class="linkedin-link"
+                                        title="LinkedIn">in</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Día de Google Cloud. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
