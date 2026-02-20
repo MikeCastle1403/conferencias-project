@@ -160,26 +160,6 @@ events = [
         "end_time": "16:30",
         "type": "charla"
     },
-    {
-        "id": 9,
-        "title": "Modernizando con Anthos",
-        "speakers": get_speakers_by_ids([3, 7]),
-        "category": "Nube Híbrida",
-        "description": "Estrategias para modernizar aplicaciones existentes y ejecutarlas en cualquier lugar con Anthos.",
-        "start_time": "16:30",
-        "end_time": "17:00",
-        "type": "charla"
-    },
-    {
-        "id": 10,
-        "title": "Panel: Cultura Cloud Native",
-        "speakers": get_speakers_by_ids([1, 6, 8]),
-        "category": "Cultura",
-        "description": "Un panel de discusión sobre cómo fomentar una cultura cloud-native dentro de las organizaciones y superar los desafíos de transformación.",
-        "start_time": "17:15",
-        "end_time": "18:00",
-        "type": "charla"
-    },
      {
         "id": 11,
         "title": "Palabras de Cierre",
